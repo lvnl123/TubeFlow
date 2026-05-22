@@ -11,6 +11,8 @@
   <img alt="Engine" src="https://img.shields.io/badge/引擎-yt--dlp-FF6B35?style=for-the-badge&logo=youtube">
   <img alt="FFmpeg" src="https://img.shields.io/badge/合并-FFmpeg-6A4C93?style=for-the-badge&logo=ffmpeg">
   <img alt="License" src="https://img.shields.io/badge/许可证-MIT-yellow?style=for-the-badge">
+  <img alt="Version" src="https://img.shields.io/badge/版本-v1.0-blue?style=for-the-badge">
+  <img alt="Status" src="https://img.shields.io/badge/状态-积极维护-brightgreen?style=for-the-badge">
 </p>
 
 <p>
@@ -92,9 +94,11 @@ CLI 引擎 (yt-dlp.exe)  ──失败──▶  Python 引擎 (yt_dlp 库)
 
 ### 🛠 更多实用特性
 
-- 📋 **格式表格**：分辨率、帧率、编码、码率、预估大小一目了然
-- 🔄 **后台下载**：多线程执行，界面不卡顿，随时暂停/继续/取消
-- 🌐 **代理支持**：HTTP/HTTPS 代理 + 一键连通性测试
+- 📋 **格式表格**：分辨率、帧率、编码、码率、预估大小一目了然，支持排序
+- � **关键词筛选**：输入 `1080` / `mp4` / `m4a` 等关键词，快速过滤格式列表
+- ⚡ **快捷下载**：一键下载推荐画质音视频 / 最佳音质音频
+- �🔄 **后台下载**：多线程执行，界面不卡顿，随时暂停/继续/取消
+- 🌐 **代理支持**：HTTP/HTTPS/SOCKS5 代理 + 一键连通性测试
 - 🍪 **Cookie 支持**：文件导入 + Chrome/Edge 浏览器 Cookie 读取
 - 📝 **实时日志**：下载进度、合并过程、错误原因全在底部面板
 - 💾 **状态记忆**：记住保存目录、历史链接、偏好设置
@@ -148,15 +152,15 @@ python run.py
 ```
 ① 粘贴 YouTube 链接
         ↓
-② 点击「快速解析」→ 看到标题、作者、时长
+② 点击「快速解析」
+   ├─ 第一阶段：秒出标题、作者、时长
+   └─ 第二阶段：自动加载完整格式表格
         ↓
-③ 点击「加载格式」→ 看到清晰格式表格
+③ 切换到对应分页（视频 / 音频 / 音视频）
         ↓
-④ 切换到对应分页（视频 / 音频 / 音视频）
+④ 选择想要的格式 & 保存目录
         ↓
-⑤ 选择想要的格式 & 保存目录
-        ↓
-⑥ 点击「下载」→ 底部日志区实时反馈
+⑤ 点击「下载」→ 底部日志区实时反馈
 ```
 
 ### 三个分页详解
@@ -196,7 +200,7 @@ TubeFlow 内置两条下载链路，针对不同场景智能调度：
 
 ## 🔧 高级设置
 
-在菜单栏 → 高级设置中可以配置：
+在左侧面板 →「高级设置 / 诊断」按钮中可以配置：
 
 | 设置项 | 说明 |
 |--------|------|
@@ -224,16 +228,18 @@ TubeFlow 内置两条下载链路，针对不同场景智能调度：
 TubeFlow/
 ├── src/
 │   └── youtube_downloader/
+│       ├── __init__.py       # 包入口
 │       ├── app.py            # GUI 界面 & 交互逻辑
 │       ├── downloader.py     # 下载调度 & 引擎回退 & FFmpeg 合并
-│       ├── helper_cli.py     # Python 引擎链路兼容辅助
+│       ├── helper_cli.py     # Python 引擎兼容子进程
 │       └── models.py         # 数据模型（格式项、媒体方案、元信息）
 ├── run.py                    # 程序入口
 ├── requirements.txt          # Python 依赖
-├── install.bat               # 一键安装脚本
-├── start.bat                 # 一键启动脚本
-└── README.md
+├── README.md                 # 本文件
+└── .gitignore                # Git 忽略规则
 ```
+
+> ℹ️ `app_state.json` 不在源码中，首次运行时会自动生成，用于保存用户偏好设置和最近链接。已通过 `.gitignore` 排除。
 
 ---
 
